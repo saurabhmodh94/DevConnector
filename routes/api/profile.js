@@ -66,6 +66,11 @@ router.post(
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
         // Update
+        Profile.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: profileFields },
+          { new: true }
+        ).then(profile => res.json(profile));
       } else {
         // Create
 
