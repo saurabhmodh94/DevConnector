@@ -242,7 +242,13 @@ router.delete(
   (req, res) => {
     Profile.findOne({ user: req.user.id })
       .then(profile => {
-        // TODO: Delete Logic Here
+        // Get remove index
+        const removeIndex = profile.experience
+          .map(item => item.id)
+          .indexOf(req.params.exp_id);
+
+        // Splice out of array
+        profile.experience.splice(removeIndex, 1);
 
         // Save
         profile.save().then(profile => res.json(profile));
