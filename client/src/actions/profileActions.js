@@ -40,7 +40,7 @@ export const getCurrentProfile = () => dispatch => {
       });
       dispatch({
         type: PROFILE_NOT_FOUND,
-        payload: null
+        payload: {}
       });
     }); // tip: multiple dispatch
 };
