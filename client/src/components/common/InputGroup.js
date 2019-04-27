@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextFieldGroup = ({
+const InputGroup = ({
   name,
   placeholder,
   value,
-  label,
-  error,
   info,
+  error,
+  icon,
   type,
   onChange,
   disabled,
@@ -16,8 +16,13 @@ const TextFieldGroup = ({
   id
 }) => {
   return (
-    <div className="form-group">
-      {label && <label htmlFor={id ? id : ''}>{label}</label>}
+    <div className="input-group mb-3">
+      <div className="input-group-prepend">
+        <span className="input-group-text">
+          <i className={icon} />
+        </span>
+      </div>
+
       <input
         type={type}
         className={`form-control form-control-lg ${
@@ -37,11 +42,11 @@ const TextFieldGroup = ({
   );
 };
 
-TextFieldGroup.propTypes = {
+InputGroup.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
-  label: PropTypes.string,
+  icon: PropTypes.string,
   info: PropTypes.string,
   error: PropTypes.string,
   type: PropTypes.string.isRequired,
@@ -52,8 +57,8 @@ TextFieldGroup.propTypes = {
   id: PropTypes.string
 };
 
-TextFieldGroup.defaultProps = {
+InputGroup.defaultProps = {
   type: 'text'
-}; // tip
+};
 
-export default TextFieldGroup;
+export default InputGroup;
