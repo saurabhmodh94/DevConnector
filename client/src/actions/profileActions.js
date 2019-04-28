@@ -7,6 +7,7 @@ import {
   PROFILE_NOT_FOUND,
   GET_ERRORS
 } from './types';
+import { logoutUser } from './authActions';
 
 // Profile loading
 export const setProfileLoading = () => {
@@ -56,4 +57,19 @@ export const createProfile = (profileData, history) => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+// Delete account & profile
+export const deleteAccount = () => dispatch => {
+  if (window.confirm('Are you sure? This can NOT be undone!')) {
+    axios
+      .delete('/api/profile')
+      .then(res => dispatch(logoutUser()))
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      );
+  }
 };
