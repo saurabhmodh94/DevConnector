@@ -23,7 +23,9 @@ const keys = require('./config/keys');
 // Connect to MongoDB
 mongoose
   .connect(keys.mongoURI, {
-    useNewUrlParser: true // to get rid of warning
+    // to get rid of DeprecationWarning
+    useNewUrlParser: true,
+    useFindAndModify: false
   })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
