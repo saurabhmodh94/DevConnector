@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteExperience } from '../../actions/profileActions';
-
+import formatDate from './../../utils/moment';
 class Experience extends Component {
   onDeleteClick = id => {
     this.props.deleteExperience(id);
@@ -14,10 +14,16 @@ class Experience extends Component {
         <td>{exp.company}</td>
         <td>{exp.title}</td>
         <td>
-          {exp.from}-{exp.to === null ? ' Now' : exp.to}
+          {formatDate(exp.from, 'YYYY/MM/DD')}-
+          {exp.to === null ? ' Now' : formatDate(exp.to, 'YYYY/MM/DD')}
         </td>
         <td>
-          <button className="btn btn-danger">Delete</button>
+          <button
+            onClick={() => this.onDeleteClick(exp._id)} // tip
+            className="btn btn-danger"
+          >
+            Delete
+          </button>
         </td>
       </tr>
     ));
