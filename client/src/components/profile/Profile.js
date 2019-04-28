@@ -10,7 +10,11 @@ import Spinner from '../common/Spinner';
 import { getProfileByHandle } from '../../actions/profileActions';
 
 class Profile extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    if (this.props.match.params.handle) {
+      this.props.getProfileByHandle(this.props.match.params.handle);
+    } // tip: url params
+  }
 
   render() {
     const { profile, loading } = this.props.profile;
