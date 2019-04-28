@@ -76,6 +76,7 @@ class App extends Component {
                 />
                 <Route exact path="/profiles" component={Profiles} />
                 <Route exact path="/profile/:handle" component={Profile} />
+                <Route exact path="/user/:user_id" component={Profile} />
                 <Route exact path="/not-found" component={NotFound} />
                 <PrivateRoute exact path="/feed" component={Posts} />
               </Switch>

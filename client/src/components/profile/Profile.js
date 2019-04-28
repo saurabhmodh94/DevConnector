@@ -11,9 +11,15 @@ import { getProfileByHandle } from '../../actions/profileActions';
 
 class Profile extends Component {
   componentDidMount() {
-    if (this.props.match.params.handle) {
-      this.props.getProfileByHandle(this.props.match.params.handle);
-    } // tip: url params
+    const params = this.props.match.params;
+    if (params.handle || params.user_id) {
+      let id, handle;
+      // eslint-disable-next-line
+      params.handle
+        ? ((id = params.handle), (handle = true))
+        : ((id = params.user_id), (handle = false));
+      this.props.getProfileByHandle(id, handle);
+    } // tip: url params // tip: super code
   }
 
   componentWillReceiveProps(nextProps) {

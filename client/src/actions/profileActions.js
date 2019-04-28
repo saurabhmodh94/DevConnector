@@ -165,11 +165,11 @@ export const getProfiles = () => dispatch => {
     });
 };
 
-// Get profile by handle
-export const getProfileByHandle = handle => dispatch => {
+// Get profile by handle or user_id
+export const getProfileByHandle = (id, handle = true) => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get(`/api/profile/handle/${handle}`)
+    .get(`/api/profile/${handle ? `handle/${id}` : `user/${id}`}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE,
