@@ -3,13 +3,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteExperience } from '../../actions/profileActions';
 import formatDate from './../../utils/moment';
+import isEmpty from '../../validation/is-empty';
+
 class Experience extends Component {
   onDeleteClick = id => {
     this.props.deleteExperience(id);
   };
 
   render() {
-    const experience = this.props.experience.map(exp => (
+    const expData = this.props.experience;
+    const experience = expData.map(exp => (
       <tr key={exp._id}>
         <td>{exp.company}</td>
         <td>{exp.title}</td>
@@ -30,17 +33,21 @@ class Experience extends Component {
     return (
       <div>
         <h4 className="mb-4">Experience Credentials</h4>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Title</th>
-              <th>Years</th>
-              <th />
-            </tr>
-            {experience}
-          </thead>
-        </table>
+        {!isEmpty(expData) ? (
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Title</th>
+                <th>Years</th>
+                <th />
+              </tr>
+              {experience}
+            </thead>
+          </table>
+        ) : (
+          <div className="jumbotron"> No Details Found.</div>
+        )}
       </div>
     );
   }

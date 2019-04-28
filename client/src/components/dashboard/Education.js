@@ -47,7 +47,7 @@ class Education extends Component {
             {education}
           </table>
         ) : (
-          <div> No Details Found.</div>
+          <div className="jumbotron"> No Details Found.</div>
         )}
       </div>
     );
