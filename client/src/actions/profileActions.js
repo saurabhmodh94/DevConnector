@@ -10,9 +10,10 @@ import {
 import { logoutUser } from './authActions';
 
 // Profile loading
-export const setProfileLoading = () => {
+export const setProfileLoading = (flag = true) => {
   return {
-    type: PROFILE_LOADING
+    type: PROFILE_LOADING,
+    payload: flag // tip: default params
   };
 };
 
@@ -102,6 +103,7 @@ export const addEducation = (eduData, history) => dispatch => {
 
 // Delete Experience
 export const deleteExperience = id => dispatch => {
+  dispatch(setProfileLoading());
   axios
     .delete(`/api/profile/experience/${id}`)
     .then(res =>
@@ -110,10 +112,11 @@ export const deleteExperience = id => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
-    );
+      });
+      dispatch(setProfileLoading(false));
+    });
 };

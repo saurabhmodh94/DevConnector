@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
     case PROFILE_LOADING:
       return {
         ...state,
-        loading: true
+        loading: action.payload
       };
     case GET_PROFILE:
     case PROFILE_NOT_FOUND:
