@@ -4,11 +4,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
+import ProfileActions from './ProfileActions';
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
   }
+  onDeleteClick = e => {
+    // Delete Account
+  };
 
   render() {
     const { user } = this.props.auth;
@@ -21,7 +25,18 @@ class Dashboard extends Component {
     } else {
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
-        dashboardContent = <div>Profile Info</div>;
+        dashboardContent = (
+          <div>
+            <p className="lead text-muted">
+              Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
+            </p>
+            <ProfileActions />
+            <div style={{ marginBottom: '60px' }} />
+            <button onClick={this.onDeleteClick} className="btn btn-danger">
+              Delete My Account
+            </button>
+          </div>
+        );
       } else {
         // User is logged in but has no profile
         dashboardContent = (
